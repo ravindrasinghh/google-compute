@@ -8,5 +8,10 @@ pipeline {
                 }
             }
         }
+        stage {'terraform init'} {
+            steps {
+                sh 'ls'
+            }
+        }
     }
 }
