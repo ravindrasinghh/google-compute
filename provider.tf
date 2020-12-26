@@ -4,7 +4,7 @@ terraform {
   }
   backend "gcs" {
     bucket = "test-terraform-01"
-    credentilas = "terraform.json"
+    credentials = "terraform.json"
   }
 }
 
