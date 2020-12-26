@@ -1,0 +1,3 @@
+variable "environment" {
+  type = map
+}
