@@ -2,7 +2,9 @@ pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')
     }
-    agent any 
+    agent any {
+        credentials = 'test'        
+    }
     stages {
         stage ('checkout') {
             steps {
@@ -13,7 +15,7 @@ pipeline {
         }
         stage ('terraform init') {
             steps {
-                sh 'terraform init -input=false'
+                sh 'terraform init -input=false -credentials=env.credentials'
             }
         }
         stage ('terraform plan') {
