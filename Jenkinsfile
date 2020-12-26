@@ -2,7 +2,10 @@ pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')
     }
-    agent any
+    agent any 
+    options {
+      buildDiscarder(logRotator(numToKeepStr: "10"))
+  }
     stages {
         stage ('checkout') {
             steps {
@@ -14,7 +17,8 @@ pipeline {
         stage ('terraform init') {
             steps {
                 sh 'terraform init -input=false'
-                sh 'pwd'
+                sh 'pwd;cd /var/lib/jenkins/workspace/devops'
+                sh 'rm -rf .terraform/*'
             }
         }
         stage ('terraform plan') {
