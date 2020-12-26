@@ -18,11 +18,9 @@ pipeline {
         }
         stage ('terraform plan') {
             steps {
-                sh 'terraform workspace delete ${environment}'
                 sh 'terraform workspace new ${environment}'
                 sh 'terraform workspace select ${environment}'
-                sh 'terraform workspace show'
-                sh 'terrafrom plan'
+                sh 'terrafrom plan -input=false -out tfplan'
             }
         }
     }
