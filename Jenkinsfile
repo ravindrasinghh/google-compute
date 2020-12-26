@@ -2,9 +2,7 @@ pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')
     }
-    agent none {
-        credentials = 'test'        
-    }
+    agent any
     stages {
         stage ('checkout') {
             steps {
