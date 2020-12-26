@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("terraform.json")
+  credentials = "${GOOGLE_APPLICATION_CREDENTIAL}"
   project     = "kinetic-guild-274011"
   region      = "asia-east1"
 }
