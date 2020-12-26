@@ -4,7 +4,7 @@ terraform {
   }
   backend "gcs" {
     bucket = "test-terraform-01"
-    credentials = "terraform.json"
+    credentials = "/home/ubuntu/terraform.json"
   }
 }
 
