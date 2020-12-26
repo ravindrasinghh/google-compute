@@ -26,7 +26,7 @@ pipeline {
                 sh 'terraform init'
                 //sh 'terraform workspace new ${environment}'
                 sh 'terraform workspace select ${environment}'
-                sh 'terrafrom plan -input=false -out tfplan'
+                sh 'terraform plan -input=false -out tfplan'
             }
         }
     }
