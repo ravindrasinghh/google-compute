@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = "${GOOGLE_APPLICATION_CREDENTIAL}"
+  credentials = "/home/ubuntu/terraform.json"
   project     = "kinetic-guild-274011"
   region      = "asia-east1"
 }
