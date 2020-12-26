@@ -22,6 +22,7 @@ pipeline {
                 sh 'terraform workspace new ${environment}'
                 sh 'terraform workspace select ${environment}'
                 sh 'terraform workspace show'
+                sh 'terrafrom plan'
             }
         }
     }
