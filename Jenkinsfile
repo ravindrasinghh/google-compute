@@ -15,7 +15,7 @@ pipeline {
         }
         stage ('terraform init') {
             steps {
-                sh 'terraform init -input=false -credentials=env.credentials'
+                sh 'terraform init -input=false'
             }
         }
         stage ('terraform plan') {
