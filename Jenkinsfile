@@ -10,7 +10,7 @@ pipeline {
         stage ('checkout') {
             steps {
                 script{
-                    git clone "https://github.com/ravindrasinghh/google-compute.git"
+                    git "https://github.com/ravindrasinghh/google-compute.git"
                 }
             }
         }
