@@ -18,6 +18,7 @@ pipeline {
         stage ('terraform init') {
             steps {
                 dir("terraform") {
+                echo 'ravindra'
                 sh 'terraform init -input=false'
                 sh 'pwd;cd /var/lib/jenkins/workspace/private/terraform'
                 sh 'rm -rf .terraform/*'
