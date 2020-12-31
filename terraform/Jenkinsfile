@@ -17,10 +17,11 @@ pipeline {
         }
         stage ('terraform init') {
             steps {
-                sh 'pwd;cd terraform'
+                dir("terraform") {
                 sh 'terraform init -input=false'
                 sh 'pwd;cd /var/lib/jenkins/workspace/devops'
                 sh 'rm -rf .terraform/*'
+                }
             }
         }
         stage ('terraform plan') {
