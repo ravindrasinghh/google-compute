@@ -36,7 +36,9 @@ pipeline {
         }
         stage ('terraform apply') {
             steps {
+                dir("terraform") {
                 sh 'ls'
+                }
             }
         }
     }
