@@ -41,5 +41,12 @@ pipeline {
                 }
             }
         }
+        stage ('QA Approve')  {
+        echo "Taking approval from QA manager"
+
+        timeout(time: 7, unit: 'DAYS') {
+        input message: 'Do you want to proceed to PROD?', submitter: 'admin'
+  }
+}
     }
 }
