@@ -19,7 +19,7 @@ pipeline {
             steps {
                 dir("terraform") {
                 sh 'terraform init -input=false'
-                sh 'pwd;cd /var/lib/jenkins/workspace/devops'
+                sh 'pwd;cd /var/lib/jenkins/workspace/private/terraform'
                 sh 'rm -rf .terraform/*'
                 }
             }
