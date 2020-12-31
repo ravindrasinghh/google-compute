@@ -2,6 +2,7 @@ pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')    
        choice(name: 'branch_name', choices: ['master','development'], description: 'Select branch name')
+       booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
     agent any 
     options {
@@ -41,12 +42,5 @@ pipeline {
                 }
             }
         }
-        stage ('QA Approve')  {
-        echo "Taking approval from QA manager"
-
-        timeout(time: 7, unit: 'DAYS') {
-        input message: 'Do you want to proceed to PROD?', submitter: 'admin'
-  }
-}
     }
 }
