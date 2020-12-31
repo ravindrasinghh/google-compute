@@ -32,6 +32,23 @@ pipeline {
                 sh 'terraform workspace select ${environment}'
                 sh 'ls'    
                 sh 'terraform plan -input=false -out tfplan'
+                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh 'pwd'
+                }
+            }
+        }
+        stage ('Approval') {
+            when {
+                not {
+                    equals expected: true, actual: params.autoApprove
+                }
+            }
+            steps {
+                script {
+                    sh 'pwd'
+                    def plan = readFile 'terraform/tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
             }
         }
