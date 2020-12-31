@@ -28,8 +28,8 @@ pipeline {
             steps {
                 dir("terraform") {
                 sh 'terraform init'
-                sh 'terraform workspace new ${environment}'
                 sh 'terraform workspace select ${environment}'
+                sh 'pwd'    
                 sh 'terraform plan -input=false -out tfplan'
                 }
             }
