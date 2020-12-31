@@ -1,7 +1,7 @@
 pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')    
-       string(name: 'branch_name', defaultValue: 'master', description: 'Production Server')
+       choice(name: 'branch_name', choices: ['master','development'], description: 'Production Server')
     }
     agent any 
     options {
@@ -11,7 +11,7 @@ pipeline {
         stage ('checkout') {
             steps {
                 script{
-                    git (credentialsId: 'git', url: 'https://github.com/ravindrasinghh/google-compute',branch: '${params.branch_name}')
+                    git (credentialsId: 'git', url: 'https://github.com/ravindrasinghh/google-compute',branch: '${branch_name}')
                 }
             }
         }
