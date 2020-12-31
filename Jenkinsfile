@@ -10,7 +10,7 @@ pipeline {
         stage ('checkout') {
             steps {
                 script{
-                    git "https://github.com/ravindrasinghh/google-compute.git"
+                    git (credentialsId: 'git', url: 'https://github.com/ravindrasinghh/google-compute',branch: 'master')
                 }
             }
         }
