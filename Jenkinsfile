@@ -1,7 +1,7 @@
 pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')
-       choice(name: 'branch_name', choices: ['master'], description: 'Setting this will deploy the services on selected environment')
+       choice(name: 'BRANCH_NAME', choices: ['master'], description: 'Setting this will deploy the services on selected environment')
        
     }
     agent any 
