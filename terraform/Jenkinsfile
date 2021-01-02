@@ -29,11 +29,9 @@ pipeline {
             steps {
                 dir("terraform") {
                 sh 'terraform init'
-                sh 'terraform workspace select ${environment}'
-                sh 'ls'    
+                sh 'terraform workspace select ${environment} || terraform workspace new ${Environment}' 
                 sh 'terraform plan -input=false -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
-                sh 'pwd'
                 }
             }
         }
@@ -45,7 +43,6 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'pwd'
                     def plan = readFile '/var/lib/jenkins/workspace/private/terraform/tfplan.txt'
                     input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
