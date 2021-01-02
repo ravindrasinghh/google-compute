@@ -16,7 +16,7 @@ environment = {
     image_name   = "centos-cloud/centos-8"
   },
   "stage" = {
-    server_name  = "qa-test-server-v2"
+    server_name  = "stage-test-server-v2"
     machine_type = "e2-medium"
     zone         = "asia-east1-a"
     network      = "test-1"
