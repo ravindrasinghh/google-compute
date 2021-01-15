@@ -19,7 +19,7 @@ pipeline {
         stage ('terraform init') {
             steps {
                 dir("terraform") {
-                withCredentials([file(credentialsId: 'kinetic-guild-274011', variable: 'kinetic-guild-274011')]) {
+                withCredentials([file(credentialsId:'', variable: 'kinetic-guild-274011')]) {
                     sh "ls"
                 }    
                 sh 'terraform init -input=false'
