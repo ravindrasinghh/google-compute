@@ -4,7 +4,7 @@ pipeline {
        choice(name: 'branch_name', choices: ['master','development'], description: 'Select branch name')
        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
-    agent any {
+    agent any 
         environment {
             credentials = credentials('kinetic-guild-274011')
     }
