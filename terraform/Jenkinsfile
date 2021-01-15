@@ -20,6 +20,7 @@ pipeline {
             steps {
                 dir("terraform") {
                 withCredentials([file(credentialsId:'kinetic-guild-274011', variable: 'kinetic-guild-274011')]) {
+                    sh("gcloud auth activate-service-account --key-file=${kinetic-guild-274011}")
                     sh 'terraform init -input=false'
                 }    
                 sh 'terraform init -input=false'
