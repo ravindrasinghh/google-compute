@@ -5,9 +5,6 @@ pipeline {
        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
     agent any 
-        environment {
-            credentials = credentials('kinetic-guild-274011')
-    }
     options {
       buildDiscarder(logRotator(numToKeepStr: "10"))
   }
