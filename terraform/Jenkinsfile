@@ -36,7 +36,7 @@ pipeline {
         stage ('terraform plan') {
             steps {
                 dir("terraform") {
-                sh 'terraform in'
+                sh 'terraform init'
                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}' 
                 sh 'terraform plan -input=false -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
@@ -49,6 +49,9 @@ pipeline {
                     equals expected: true, actual: params.autoApprove
                 }
             }
+            options {
+                timeout(time: 1,unit: "MINUTES")
+            }    
             steps {
                 script {
                     def plan = readFile '/var/lib/jenkins/workspace/private/terraform/tfplan.txt'
