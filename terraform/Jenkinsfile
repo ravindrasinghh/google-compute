@@ -2,8 +2,17 @@ pipeline {
     parameters {
        choice(name: 'environment', choices: ['dev','qa','stage','prod'], description: 'Setting this will deploy the services on selected environment')    
        choice(name: 'branch_name', choices: ['master','development'], description: 'Select branch name')
+       booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
     agent any 
+    environment {
+        // Slack configuration
+        SLACK_CHANNEL       = "#ankit_gcp_terrafrom" 
+        SLACK_COLOR_DANGER  = "#E01563" 
+        SLACK_COLOR_INFO    = "#6ECADC" 
+        SLACK_COLOR_WARNING = "#FFC300" 
+        SLACK_COLOR_GOOD    = "#3EB991"
+    }    
     options {
       buildDiscarder(logRotator(numToKeepStr: "10"))
   }
@@ -56,4 +65,29 @@ pipeline {
             }
         }
     }
+post { 
+    always {
+        echo "One way or another, I have finished" 
+        //deleteDir() /* clean up our workspace */ 
+    } 
+    
+    // trigger when successful 
+    success { 
+        echo "I succeeeded!" 
+        slackSend (channel: "${env.SLACK_CHANNEL}", color: "${env.SLACK_COLOR_GOOD}", message: "*SUCCESS:* Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+    } 
+    
+    // trigger when failed 
+    failure { 
+        echo "I failed :(" 
+        //currentBuild.rawBuild.getLog(10) 
+        slackSend (channel: "${env.SLACK_CHANNEL}", color: "${env.SLACK_COLOR_DANGER}", message: "*FAILED:* Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+    } 
+    
+    // trigger when aborted 
+    aborted { 
+        echo "Build aborted!" 
+        slackSend (channel: "${env.SLACK_CHANNEL}", color: "${env.SLACK_COLOR_WARNING}", message: "*ABORTED:* Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})") 
+    } 
+  } 
 }
