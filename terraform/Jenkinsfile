@@ -19,8 +19,6 @@ pipeline {
         stage ('terraform init') {
             steps {
                 dir("terraform") {
-                withCredentials([file(credentialsId: '1d0e6475-b226-4cf3-879b-4e1e89877599', variable: 'kinetic-guild-274011')]) {
-                }    
                 sh 'terraform init -input=false'
                 sh 'pwd;cd /var/lib/jenkins/workspace/private/terraform'
                 sh 'rm -rf .terraform/*'
